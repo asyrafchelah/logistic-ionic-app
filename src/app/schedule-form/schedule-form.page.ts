@@ -35,7 +35,7 @@ export class ScheduleFormPage implements OnInit {
 
   onClickNext(){
     this.logisticService.setFormValues(this.scheduleForm.value, "schedule")
-    this.navCtrl.navigateForward("/schedule-form")
+    this.logisticService.saveToDb()
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { LogisticsService } from '../logistics.service';
+
 
 
 
@@ -14,7 +15,9 @@ export class CargoDetailsFormPage implements OnInit {
 
   cargoDetailsForm = new FormGroup({
     description: new FormControl(),
-    disclaimer: new FormControl()
+    disclaimer: new FormControl("", [
+      Validators.required
+    ])
   })
 
   disclaimerOptions = ["hazardous", "materials", "insurance"]
@@ -33,8 +36,13 @@ export class CargoDetailsFormPage implements OnInit {
     this.cargoDetailsForm.controls[fieldName].setValue(optionValue)
   }
 
+  isValid(){
+    return this.cargoDetailsForm.controls.disclaimer.valid
+  }
+
+
   onClickNext(){
-    this.logisticService.setFormValues(this.cargoDetailsForm.value, "cargo-details")
+    this.logisticService.setFormValues(this.cargoDetailsForm.value, "cargodetails")
     this.navCtrl.navigateForward("/shipping-form")
   }
 
